@@ -7,11 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './button.component.css',
 })
 export class ButtonComponent {
-  constructor() {
-    console.log('ButtonComponent created');
-  }
-
-  onClick() {
-    console.log('Button clicked');
-  }
+  constructor() {}
 }
