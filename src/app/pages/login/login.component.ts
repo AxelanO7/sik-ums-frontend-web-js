@@ -25,7 +25,6 @@ export class LoginComponent {
   };
 
   handleLogin = () => {
-    console.log('Logging in with', this.username, this.password);
     if (this.toggleDialog) {
       Swal.fire({
         icon: 'success',
