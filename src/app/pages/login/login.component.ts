@@ -17,13 +17,11 @@ export class LoginComponent {
   handleUsernameChange = (event: Event) => {
     const target = event.target as HTMLInputElement;
     this.username = target.value;
-    console.log('Username changed:', this.username);
   };
 
   handlePasswordChange = (event: Event) => {
     const target = event.target as HTMLInputElement;
     this.password = target.value;
-    console.log('Password changed:', this.password);
   };
 
   handleLogin = () => {
