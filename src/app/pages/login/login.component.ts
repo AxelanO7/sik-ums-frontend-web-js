@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CoreModule } from '../../core/core.module';
-import { InputComponent } from '../../components/input/input.component';
+import { InputComponent } from '../../common/components/input/input.component';
 import Swal from 'sweetalert2';
 
 @Component({
