@@ -25,17 +25,13 @@ export class LoginComponent {
   };
 
   handleLogin = () => {
-    if (this.toggleDialog) {
-      Swal.fire({
-        icon: 'success',
-        title: 'Login Successful',
-      });
+    if (this.username === 'admin' && this.password === 'admin') {
+      window.location.href = '/dashboard';
     } else {
       Swal.fire({
         icon: 'error',
         title: 'Login Failed',
       });
     }
-    this.toggleDialog = !this.toggleDialog;
   };
 }
