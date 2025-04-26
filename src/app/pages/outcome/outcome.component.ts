@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
+import { AppLayoutComponent } from '../../common/components/layout/app-layout/app-layout.component';
 
 @Component({
   selector: 'app-outcome',
-  imports: [],
+  imports: [AppLayoutComponent],
   templateUrl: './outcome.component.html',
-  styleUrl: './outcome.component.css'
+  styleUrl: './outcome.component.css',
 })
-export class OutcomeComponent {
-
-}
+export class OutcomeComponent {}

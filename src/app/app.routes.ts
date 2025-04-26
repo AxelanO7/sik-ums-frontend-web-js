@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AppLayoutComponent } from './common/components/layout/app-layout/app-layout.component';
+import { IncomeComponent } from './pages/income/income.component';
+import { OutcomeComponent } from './pages/outcome/outcome.component';
 
 export const routes: Routes = [
   {
@@ -15,5 +16,13 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+  },
+  {
+    path: 'income',
+    component: IncomeComponent,
+  },
+  {
+    path: 'outcome',
+    component: OutcomeComponent,
   },
 ];
