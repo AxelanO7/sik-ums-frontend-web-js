@@ -12,5 +12,4 @@ export class ButtonComponent {
   @Input() customClass: string = '';
   @Input() bgColor: string = 'bg-blue-400';
   @Input() textColor: string = 'text-white';
-  @Input() handleOnClick: () => void = () => {};
 }
