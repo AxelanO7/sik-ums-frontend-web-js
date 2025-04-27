@@ -1,13 +1,39 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [],
+  imports: [MatIconModule, CommonModule],
   templateUrl: './app-sidebar.component.html',
   styleUrl: './app-sidebar.component.css',
 })
 export class AppSidebarComponent {
+  sidebarItem = [
+    {
+      name: 'Home',
+      link: '/dashboard',
+      icon: 'home',
+    },
+    {
+      name: 'Pemasukan',
+      link: '/income',
+      icon: 'payment',
+    },
+    {
+      name: 'Pengeluaran',
+      link: '/outcome',
+      icon: 'request_quote',
+    },
+    {
+      name: 'Laporan',
+      link: '/report',
+      icon: 'description',
+    },
+  ];
+
   handleLogout = () => {
     Swal.fire({
       title: 'Anda yakin?',
@@ -24,4 +50,6 @@ export class AppSidebarComponent {
       }
     });
   };
+
+  constructor(public router: Router) {}
 }

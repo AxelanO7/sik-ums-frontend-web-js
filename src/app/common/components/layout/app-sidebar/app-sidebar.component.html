@@ -10,42 +10,27 @@
     <p class="text-white text-2xl font-bold">UD MEDIA SARPAS</p>
   </div>
 
-  <ul class="mt-4">
-    <li class="py-2 px-4 rounded-lg hover:bg-gray-800 transition duration-300">
-      <a href="#" class="text-white flex items-center group">
-        <i class="fas fa-home mr-2 group-hover:text-blue-500"></i>
-        <span class="group-hover:text-blue-500">Home</span>
+  <ul class="mt-4 space-y-2">
+    <li
+      *ngFor="let item of sidebarItem"
+      [class]="
+        'py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-300' +
+        (router.url.includes(item.link) ? ' bg-gray-700' : '')
+      "
+    >
+      <a [href]="item.link" class="text-white flex items-center space-x-2">
+        <mat-icon [fontIcon]="item.icon" />
+        <span>{{ item.name }}</span>
       </a>
     </li>
-    <li class="py-2 px-4 rounded-lg hover:bg-gray-800 transition duration-300">
-      <a href="#" class="text-white flex items-center group">
-        <i class="fas fa-arrow-up mr-2 group-hover:text-green-500"></i>
-        <span class="group-hover:text-green-500">Pemasukan</span>
-      </a>
-    </li>
-    <li class="py-2 px-4 rounded-lg hover:bg-gray-800 transition duration-300">
-      <a
-        href="#"
-        class="text readonly FileIcon = FileIcon; -white flex items-center group"
+    <li class="py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-300">
+      <div
+        class="text-white flex items-center space-x-2"
+        (click)="handleLogout()"
       >
-        <i class="fas fa-arrow-down mr-2 group-hover:text-red-500"></i>
-        <span class="group-hover:text-red-500">Pengeluaran</span>
-      </a>
-    </li>
-    <li class="py-2 px-4 rounded-lg hover:bg-gray-800 transition duration-300">
-      <a href="#" class="text-white flex items-center group">
-        <i class="fas fa-file mr-2 group-hover:text-yellow-500"></i>
-        <span class="group-hover:text-yellow-500">Laporan</span>
-      </a>
+        <mat-icon fontIcon="exit_to_app" />
+        <span>Keluar</span>
+      </div>
     </li>
   </ul>
-  <div
-    class="py-2 px-4 rounded-lg hover:bg-gray-800 transition duration-300"
-    (click)="handleLogout()"
-  >
-    <div class="text-white flex items-center group">
-      <i class="fas fa-sign-out-alt mr-2 group-hover:text-blue-500"></i>
-      <span class="group-hover:text-blue-500">Logout</span>
-    </div>
-  </div>
 </div>

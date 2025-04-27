@@ -3,7 +3,7 @@
   <main class="p-2">
     <!-- Input bar -->
     <div class="flex items-center">
-      <p class="text-lg font-bold mr-2">PEMASUKAN</p>
+      <p class="text-lg font-bold mr-2">LAPORAN</p>
     </div>
 
     <!-- Table -->
@@ -26,24 +26,25 @@
             *ngFor="let row of tableData"
             class="border-2 border-black bg-white"
           >
-            <td class="border-2 border-black px-1 py-0.5">{{ row.date }}</td>
-            <td class="border-2 border-black px-1 py-0.5">{{ row.name }}</td>
             <td class="border-2 border-black px-1 py-0.5">
-              {{ row.price | currency : "Rp " }}
+              {{ row.month }}
             </td>
             <td class="border-2 border-black px-1 py-0.5">
-              {{ row.quantity }}
+              {{ row.income | currency : "Rp " }}
             </td>
             <td class="border-2 border-black px-1 py-0.5">
-              {{ row.total | currency : "Rp " }}
+              {{ row.outcome | currency : "Rp " }}
             </td>
           </tr>
         </tbody>
         <tfoot>
           <tr class="bg-gray-300 border-2 border-black font-bold text-xs">
-            <td colSpan="4" class="border-2 border-black px-1 py-0.5">TOTAL</td>
+            <td class="border-2 border-black px-1 py-0.5">TOTAL</td>
             <td class="border-2 border-black px-1 py-0.5">
-              {{ totalIncome | currency : "Rp " }}
+              {{ totalPemasukan | currency : "Rp " }}
+            </td>
+            <td class="border-2 border-black px-1 py-0.5">
+              {{ totalPengeluaran | currency : "Rp " }}
             </td>
           </tr>
         </tfoot>

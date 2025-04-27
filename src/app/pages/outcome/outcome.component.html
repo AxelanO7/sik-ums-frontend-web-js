@@ -1,1 +1,71 @@
-<app-layout> </app-layout>
+<app-layout>
+  <!-- Main content -->
+  <main class="p-2">
+    <!-- Input bar -->
+    <div class="flex items-center">
+      <p class="text-lg font-bold mr-2">PENGELUARAN</p>
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto mt-2">
+      <table
+        class="w-full border-collapse border-2 border-black text-center font-mono text-xs"
+      >
+        <thead>
+          <tr class="bg-gray-200 border-2 border-black">
+            <th
+              *ngFor="let header of tableHeaders"
+              class="border-2 border-black px-1 py-0.5"
+            >
+              {{ header }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let row of tableData"
+            class="border-2 border-black bg-white"
+          >
+            <td class="border-2 border-black px-1 py-0.5">{{ row.date }}</td>
+            <td class="border-2 border-black px-1 py-0.5">{{ row.name }}</td>
+            <td class="border-2 border-black px-1 py-0.5">
+              {{ row.price | currency : "Rp " }}
+            </td>
+            <td class="border-2 border-black px-1 py-0.5">
+              {{ row.quantity }}
+            </td>
+            <td class="border-2 border-black px-1 py-0.5">
+              {{ row.total | currency : "Rp " }}
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="bg-gray-300 border-2 border-black font-bold text-xs">
+            <td colSpan="4" class="border-2 border-black px-1 py-0.5">TOTAL</td>
+            <td class="border-2 border-black px-1 py-0.5">
+              {{ totalOutcome | currency : "Rp " }}
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- Buttons row -->
+    <div class="flex justify-between mt-4">
+      <button
+        class="bg-gray-300 border-2 border-black px-4 py-1 text-xs font-mono rounded-sm"
+        (click)="shownComingSoon()"
+      >
+        <i class="fa-solid fa-upload"></i>
+        Upload Nota
+      </button>
+      <button
+        class="bg-gray-300 border-2 border-black px-4 py-1 text-xs font-mono rounded-sm"
+        (click)="shownComingSoon()"
+      >
+        <i class="fa-solid fa-print"></i>
+        Print Out
+      </button>
+    </div>
+  </main>
+</app-layout>
