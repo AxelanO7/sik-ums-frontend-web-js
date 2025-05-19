@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AppLayoutComponent } from '../../common/components/layout/app-layout/app-layout.component';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
+import { defaultDataIncome } from '../../common/constant/data';
 
 @Component({
   selector: 'app-income',
@@ -11,29 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class IncomeComponent {
   tableHeaders = ['Tanggal', 'Nama Item', 'Harga', 'Jumlah', 'Total'];
-  tableData = [
-    {
-      date: '01/01/2022',
-      name: 'kertas sidu F4',
-      price: 49500,
-      quantity: 2,
-      total: 99000,
-    },
-    {
-      date: '04/01/2022',
-      name: 'pulpen queen c-6000',
-      price: 25500,
-      quantity: 4,
-      total: 102000,
-    },
-    {
-      date: '07/01/2022',
-      name: 'pulpen queen c-6000',
-      price: 25500,
-      quantity: 4,
-      total: 102000,
-    },
-  ];
+  tableData = defaultDataIncome;
 
   get totalIncome(): number {
     return this.tableData.reduce((sum, row) => sum + row.total, 0);
@@ -45,5 +24,15 @@ export class IncomeComponent {
       title: 'Coming Soon',
       text: 'Fitur ini masih dalam tahap pengembangan',
     });
+  } 
+
+  ngOnInit(): void {
+    this.fetchIncome();
+  }
+
+  private fetchIncome(): void {
+    fetch('http://localhost:3000/api/income')
+      .then((res) => res.json())
+      .then((data) => (this.tableData = data));
   }
 }
