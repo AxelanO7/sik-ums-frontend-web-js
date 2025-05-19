@@ -11,23 +11,11 @@ import { CommonModule } from '@angular/common';
 })
 export class ReportComponent {
   tableHeaders = ['Bulan', 'Pemasukan', 'Pengeluaran'];
-  tableData = [
-    {
-      month: 'Januari',
-      income: 49500,
-      outcome: 102000,
-    },
-    {
-      month: 'Februari',
-      income: 102000,
-      outcome: 102000,
-    },
-    {
-      month: 'Maret',
-      income: 102000,
-      outcome: 102000,
-    },
-  ];
+  tableData: {
+    month: string;
+    income: number;
+    outcome: number;
+  }[] = [];
 
   get totalPemasukan(): number {
     return this.tableData.reduce((sum, row) => sum + row.income, 0);
@@ -43,5 +31,15 @@ export class ReportComponent {
       title: 'Coming Soon',
       text: 'Fitur ini masih dalam tahap pengembangan',
     });
+  }
+
+  ngOnInit(): void {
+    // this.fetchReport();
+  }
+
+  private fetchReport(): void {
+    fetch('http://localhost:3000/report')
+      .then((res) => res.json())
+      .then((data) => (this.tableData = data));
   }
 }

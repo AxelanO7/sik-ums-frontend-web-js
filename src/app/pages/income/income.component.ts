@@ -12,7 +12,13 @@ import { defaultDataIncome } from '../../common/constant/data';
 })
 export class IncomeComponent {
   tableHeaders = ['Tanggal', 'Nama Item', 'Harga', 'Jumlah', 'Total'];
-  tableData = defaultDataIncome;
+  tableData: {
+    date: string;
+    name: string;
+    price: number;
+    quantity: number;
+    total: number;
+  }[] = [];
 
   get totalIncome(): number {
     return this.tableData.reduce((sum, row) => sum + row.total, 0);
@@ -24,14 +30,14 @@ export class IncomeComponent {
       title: 'Coming Soon',
       text: 'Fitur ini masih dalam tahap pengembangan',
     });
-  } 
+  }
 
   ngOnInit(): void {
     this.fetchIncome();
   }
 
   private fetchIncome(): void {
-    fetch('http://localhost:3000/api/income')
+    fetch('http://localhost:3000/income')
       .then((res) => res.json())
       .then((data) => (this.tableData = data));
   }

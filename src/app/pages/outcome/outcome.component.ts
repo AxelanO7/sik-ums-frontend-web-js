@@ -11,29 +11,13 @@ import Swal from 'sweetalert2';
 })
 export class OutcomeComponent {
   tableHeaders = ['Tanggal', 'Nama Item', 'Harga', 'Jumlah', 'Total'];
-  tableData = [
-    {
-      date: '01/01/2022',
-      name: 'kertas sidu F4',
-      price: 49500,
-      quantity: 2,
-      total: 99000,
-    },
-    {
-      date: '04/01/2022',
-      name: 'pulpen queen c-6000',
-      price: 25500,
-      quantity: 4,
-      total: 102000,
-    },
-    {
-      date: '07/01/2022',
-      name: 'pulpen queen c-6000',
-      price: 25500,
-      quantity: 4,
-      total: 102000,
-    },
-  ];
+  tableData: {
+    date: string;
+    name: string;
+    price: number;
+    quantity: number;
+    total: number;
+  }[] = [];
 
   get totalOutcome(): number {
     return this.tableData.reduce((sum, row) => sum + row.total, 0);
@@ -45,5 +29,15 @@ export class OutcomeComponent {
       title: 'Coming Soon',
       text: 'Fitur ini masih dalam tahap pengembangan',
     });
+  }
+
+  ngOnInit(): void {
+    this.fetchOutcome();
+  }
+
+  private fetchOutcome(): void {
+    fetch('http://localhost:3000/outcome')
+      .then((res) => res.json())
+      .then((data) => (this.tableData = data));
   }
 }
