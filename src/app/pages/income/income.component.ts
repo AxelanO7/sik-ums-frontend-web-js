@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AppLayoutComponent } from '../../common/components/layout/app-layout/app-layout.component';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
-import { defaultDataIncome } from '../../common/constant/data';
 
 @Component({
   selector: 'app-income',
