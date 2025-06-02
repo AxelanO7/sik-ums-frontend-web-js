@@ -23,7 +23,7 @@ export class DashboardComponent {
   }
 
   private fetchTotal() {
-    fetch('http://localhost:3000/dashboard')
+    fetch('http://localhost:3000/api/dashboard')
       .then((res) => res.json())
       .then((data) => {
         this.totalIncome = data.totalIncome;

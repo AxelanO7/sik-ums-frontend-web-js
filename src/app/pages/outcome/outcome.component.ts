@@ -36,7 +36,7 @@ export class OutcomeComponent {
   }
 
   private fetchOutcome(): void {
-    fetch('http://localhost:3000/outcome')
+    fetch('http://localhost:3000/api/outcome')
       .then((res) => res.json())
       .then((data) => (this.tableData = data));
   }
