@@ -23,7 +23,7 @@ export class DashboardComponent {
   }
 
   private fetchTotal() {
-    fetch('http://localhost:3000/api/dashboard')
+    fetch(`${process.env['BACKEND_URL']}/dashboard`)
       .then((res) => res.json())
       .then((data) => {
         this.totalIncome = data.totalIncome;

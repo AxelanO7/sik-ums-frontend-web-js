@@ -36,7 +36,7 @@ export class IncomeComponent {
   }
 
   private fetchIncome(): void {
-    fetch('http://localhost:3000/api/income')
+    fetch(`${process.env['BACKEND_URL']}/income`)
       .then((res) => res.json())
       .then((data) => (this.tableData = data));
   }

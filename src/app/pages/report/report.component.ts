@@ -38,7 +38,7 @@ export class ReportComponent {
   }
 
   private fetchReport(): void {
-    fetch('http://localhost:3000/api/report')
+    fetch(`${process.env['BACKEND_URL']}/report`)
       .then((res) => res.json())
       .then((data) => (this.tableData = data));
   }
