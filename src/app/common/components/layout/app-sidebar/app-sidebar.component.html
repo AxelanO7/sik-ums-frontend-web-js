@@ -18,14 +18,14 @@
         (router.url.includes(item.link) ? ' bg-gray-700' : '')
       "
     >
-      <a [href]="item.link" class="text-white flex items-center space-x-2">
+      <a [href]="item.link" class="text-white flex items-center space-x-4">
         <mat-icon [fontIcon]="item.icon" />
         <span>{{ item.name }}</span>
       </a>
     </li>
     <li class="py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-300">
       <div
-        class="text-white flex items-center space-x-2"
+        class="text-white flex items-center space-x-4"
         (click)="handleLogout()"
       >
         <mat-icon fontIcon="exit_to_app" />
