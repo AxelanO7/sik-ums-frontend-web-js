@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common'; // Import CommonModule
 import { AppLayoutComponent } from '../../common/components/layout/app-layout/app-layout.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [AppLayoutComponent],
+  standalone: true, // Make sure this component is standalone
+  imports: [CommonModule, AppLayoutComponent], // Add CommonModule here
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -23,16 +25,16 @@ export class DashboardComponent {
   }
 
   private fetchTotal() {
-    const backendUrl =
-      process.env['APP_ENV'] === 'production'
-        ? process.env['PROD_BACKEND_URL']
-        : process.env['LOCAL_BACKEND_URL'];
-    fetch(`${backendUrl}/dashboard`)
+    // Using a mock fetch for demonstration
+    fetch(`${process.env['BACKEND_URL']}/dashboard`)
       .then((res) => res.json())
       .then((data) => {
+        // Example data:
+        // { totalIncome: 50000000, totalOutcome: 21500000, totalBalance: 28500000 }
         this.totalIncome = data.totalIncome;
         this.totalOutcome = data.totalOutcome;
         this.totalBalance = data.totalBalance;
-      });
+      })
+      .catch((error) => console.error('Error fetching dashboard data:', error));
   }
 }

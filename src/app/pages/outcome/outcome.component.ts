@@ -36,11 +36,7 @@ export class OutcomeComponent {
   }
 
   private fetchOutcome(): void {
-    const backendUrl =
-      process.env['APP_ENV'] === 'production'
-        ? process.env['PROD_BACKEND_URL']
-        : process.env['LOCAL_BACKEND_URL'];
-    fetch(`${backendUrl}/outcome`)
+    fetch(`${process.env['BACKEND_URL']}/outcome`)
       .then((res) => res.json())
       .then((data) => (this.tableData = data));
   }

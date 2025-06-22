@@ -36,11 +36,7 @@ export class IncomeComponent {
   }
 
   private fetchIncome(): void {
-    const backendUrl =
-      process.env['APP_ENV'] === 'production'
-        ? process.env['PROD_BACKEND_URL']
-        : process.env['LOCAL_BACKEND_URL'];
-    fetch(`${backendUrl}/income`)
+    fetch(`${process.env['BACKEND_URL']}/income`)
       .then((res) => res.json())
       .then((data) => (this.tableData = data));
   }
