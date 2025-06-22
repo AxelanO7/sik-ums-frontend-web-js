@@ -38,7 +38,11 @@ export class ReportComponent {
   }
 
   private fetchReport(): void {
-    fetch(`${process.env['BACKEND_URL']}/report`)
+    const backendUrl =
+      process.env['APP_ENV'] === 'production'
+        ? process.env['PROD_BACKEND_URL']
+        : process.env['LOCAL_BACKEND_URL'];
+    fetch(`${backendUrl}/report`)
       .then((res) => res.json())
       .then((data) => (this.tableData = data));
   }

@@ -23,7 +23,11 @@ export class DashboardComponent {
   }
 
   private fetchTotal() {
-    fetch(`${process.env['BACKEND_URL']}/dashboard`)
+    const backendUrl =
+      process.env['APP_ENV'] === 'production'
+        ? process.env['PROD_BACKEND_URL']
+        : process.env['LOCAL_BACKEND_URL'];
+    fetch(`${backendUrl}/dashboard`)
       .then((res) => res.json())
       .then((data) => {
         this.totalIncome = data.totalIncome;
