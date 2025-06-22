@@ -1,21 +1,17 @@
 <app-layout>
-  <!-- Main content -->
-  <main class="p-2">
-    <!-- Input bar -->
-    <div class="flex items-center">
-      <p class="text-lg font-bold mr-2">LAPORAN</p>
+  <main class="p-4 md:p-6 lg:p-8">
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-800">LAPORAN</h1>
     </div>
 
-    <!-- Table -->
-    <div class="overflow-x-auto mt-2">
-      <table
-        class="w-full border-collapse border-2 border-black text-center font-mono text-xs"
-      >
-        <thead>
-          <tr class="bg-gray-200 border-2 border-black">
+    <div class="overflow-x-auto bg-white rounded-lg shadow">
+      <table class="w-full text-sm text-left text-gray-600">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+          <tr>
             <th
               *ngFor="let header of tableHeaders"
-              class="border-2 border-black px-1 py-0.5"
+              scope="col"
+              class="px-6 py-3"
             >
               {{ header }}
             </th>
@@ -24,42 +20,29 @@
         <tbody>
           <tr
             *ngFor="let row of tableData"
-            class="border-2 border-black bg-white"
+            class="bg-white border-b hover:bg-gray-50"
           >
-            <td class="border-2 border-black px-1 py-0.5">
-              {{ row.month }}
+            <td class="px-6 py-4 font-medium text-gray-900">{{ row.month }}</td>
+            <td class="px-6 py-4 text-green-600 font-semibold">
+              {{ row.income | currency : "Rp " : "symbol" : "1.0-0" }}
             </td>
-            <td class="border-2 border-black px-1 py-0.5">
-              {{ row.income | currency : "Rp " }}
-            </td>
-            <td class="border-2 border-black px-1 py-0.5">
-              {{ row.outcome | currency : "Rp " }}
+            <td class="px-6 py-4 text-red-600 font-semibold">
+              {{ row.outcome | currency : "Rp " : "symbol" : "1.0-0" }}
             </td>
           </tr>
         </tbody>
         <tfoot>
-          <tr class="bg-gray-300 border-2 border-black font-bold text-xs">
-            <td class="border-2 border-black px-1 py-0.5">TOTAL</td>
-            <td class="border-2 border-black px-1 py-0.5">
-              {{ totalPemasukan | currency : "Rp " }}
+          <tr class="font-bold text-gray-900 bg-gray-100">
+            <td class="px-6 py-3 text-base">TOTAL</td>
+            <td class="px-6 py-3 text-base text-green-700">
+              {{ totalPemasukan | currency : "Rp " : "symbol" : "1.0-0" }}
             </td>
-            <td class="border-2 border-black px-1 py-0.5">
-              {{ totalPengeluaran | currency : "Rp " }}
+            <td class="px-6 py-3 text-base text-red-700">
+              {{ totalPengeluaran | currency : "Rp " : "symbol" : "1.0-0" }}
             </td>
           </tr>
         </tfoot>
       </table>
-    </div>
-
-    <!-- Buttons row -->
-    <div class="flex justify-end mt-4">
-      <button
-        class="bg-gray-300 border-2 border-black px-4 py-1 text-xs font-mono rounded-sm"
-        (click)="shownComingSoon()"
-      >
-        <i class="fa-solid fa-print"></i>
-        Print Out
-      </button>
     </div>
   </main>
 </app-layout>

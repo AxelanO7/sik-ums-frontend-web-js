@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { AppSidebarComponent } from '../app-sidebar/app-sidebar.component';
 
 @Component({
   selector: 'app-layout',
-  imports: [AppSidebarComponent],
+  standalone: true,
+  imports: [CommonModule, AppSidebarComponent],
   templateUrl: './app-layout.component.html',
-  styleUrl: './app-layout.component.css',
+  styleUrls: ['./app-layout.component.css']
 })
-export class AppLayoutComponent {}
+export class AppLayoutComponent {
+  isSidebarOpen = false;
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+}

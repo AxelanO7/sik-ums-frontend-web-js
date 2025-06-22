@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AppLayoutComponent } from '../../common/components/layout/app-layout/app-layout.component';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-report',
+  standalone: true,
   imports: [AppLayoutComponent, CommonModule],
   templateUrl: './report.component.html',
-  styleUrl: './report.component.css',
+  styleUrls: ['./report.component.css'],
 })
-export class ReportComponent {
+export class ReportComponent implements OnInit {
   tableHeaders = ['Bulan', 'Pemasukan', 'Pengeluaran'];
   tableData: {
     month: string;
@@ -25,21 +26,18 @@ export class ReportComponent {
     return this.tableData.reduce((sum, row) => sum + row.outcome, 0);
   }
 
-  shownComingSoon() {
-    return Swal.fire({
-      icon: 'info',
-      title: 'Coming Soon',
-      text: 'Fitur ini masih dalam tahap pengembangan',
-    });
-  }
-
   ngOnInit(): void {
-    // this.fetchReport();
+    this.fetchReport();
   }
 
   private fetchReport(): void {
-    fetch(`${process.env['BACKEND_URL']}/report`)
+    // URL is now hardcoded as requested
+    const backendUrl = 'https://ums-stion-be.vercel.app/api';
+    fetch(`${backendUrl}/report`)
       .then((res) => res.json())
-      .then((data) => (this.tableData = data));
+      .then((data) => (this.tableData = data))
+      .catch((err) =>
+        Swal.fire('Error', 'Gagal memuat data laporan.', 'error')
+      );
   }
 }

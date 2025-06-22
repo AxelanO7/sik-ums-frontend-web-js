@@ -1,36 +1,36 @@
 <div
-  class="bg-gray-900 w-max py-4 px-8 h-screen shadow-lg border-r border-gray-800 select-none rounded-r-lg"
+  [ngClass]="{
+    'translate-x-0': isOpen,
+    '-translate-x-full': !isOpen
+  }"
+  class="bg-gray-900 text-white w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform md:relative md:translate-x-0 transition duration-200 ease-in-out z-20 shadow-lg border-r border-gray-800 select-none h-screen"
 >
-  <div class="flex flex-col items-center mt-8">
+  <div class="flex flex-col items-center text-center">
     <img
-      src="logo.png"
+      src="/logo.png"
       alt="Logo"
-      class="w-32 h-32 rounded-full mb-4 object-cover"
+      class="w-24 h-24 md:w-32 md:h-32 rounded-full mb-4 object-cover border-4 border-gray-700"
     />
-    <p class="text-white text-2xl font-bold">UD MEDIA SARPAS</p>
+    <p class="text-white text-xl font-bold px-2">UD MEDIA SARPRAS</p>
   </div>
 
-  <ul class="mt-4 space-y-2">
-    <li
+  <nav class="mt-10">
+    <a
       *ngFor="let item of sidebarItem"
-      [class]="
-        'py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-300' +
-        (router.url.includes(item.link) ? ' bg-gray-700' : '')
-      "
+      [routerLink]="item.link"
+      routerLinkActive="bg-gray-700"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="flex items-center space-x-4 py-3 px-4 rounded-lg text-white hover:bg-gray-700 transition duration-300"
     >
-      <a [href]="item.link" class="text-white flex items-center space-x-4">
-        <mat-icon [fontIcon]="item.icon" />
-        <span>{{ item.name }}</span>
-      </a>
-    </li>
-    <li class="py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-300">
-      <div
-        class="text-white flex items-center space-x-4"
-        (click)="handleLogout()"
-      >
-        <mat-icon fontIcon="exit_to_app" />
-        <span>Keluar</span>
-      </div>
-    </li>
-  </ul>
+      <mat-icon [fontIcon]="item.icon" />
+      <span>{{ item.name }}</span>
+    </a>
+    <div
+      (click)="handleLogout()"
+      class="flex items-center space-x-4 py-3 px-4 rounded-lg text-white hover:bg-gray-700 transition duration-300 cursor-pointer"
+    >
+      <mat-icon fontIcon="exit_to_app" />
+      <span>Keluar</span>
+    </div>
+  </nav>
 </div>

@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Import CommonModule
+import { Component, OnInit } from '@angular/core';
 import { AppLayoutComponent } from '../../common/components/layout/app-layout/app-layout.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
-  standalone: true, // Make sure this component is standalone
-  imports: [CommonModule, AppLayoutComponent], // Add CommonModule here
+  standalone: true,
+  imports: [CommonModule, AppLayoutComponent],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css',
+  styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent {
-  currentDate: string = new Date().toLocaleDateString('en-US', {
+export class DashboardComponent implements OnInit {
+  currentDate: string = new Date().toLocaleDateString('id-ID', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -20,17 +20,18 @@ export class DashboardComponent {
   totalOutcome: number = 0;
   totalBalance: number = 0;
 
-  constructor() {
+  constructor() {}
+
+  ngOnInit(): void {
     this.fetchTotal();
   }
 
   private fetchTotal() {
-    // Using a mock fetch for demonstration
-    fetch(`${process.env['BACKEND_URL']}/dashboard`)
+    // URL is now hardcoded as requested
+    const backendUrl = 'https://ums-stion-be.vercel.app/api';
+    fetch(`${backendUrl}/dashboard`)
       .then((res) => res.json())
       .then((data) => {
-        // Example data:
-        // { totalIncome: 50000000, totalOutcome: 21500000, totalBalance: 28500000 }
         this.totalIncome = data.totalIncome;
         this.totalOutcome = data.totalOutcome;
         this.totalBalance = data.totalBalance;
