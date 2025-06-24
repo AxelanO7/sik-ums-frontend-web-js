@@ -32,10 +32,46 @@ export class ReportComponent implements OnInit {
 
   private fetchReport(): void {
     // URL is now hardcoded as requested
-    const backendUrl = 'https://ums-stion-be.vercel.app/api';
-    fetch(`${backendUrl}/report`)
+    const backendUrl = 'http://localhost:3000/api';
+    fetch(`${backendUrl}/report/by-year/2025`)
       .then((res) => res.json())
-      .then((data) => (this.tableData = data))
+      .then((data) => {
+        this.tableData = data.month.reduce(
+          (
+            result: {
+              month: string;
+              income: number;
+              outcome: number;
+            }[],
+            monthData: {
+              month: number;
+              income: { date: string; type: 'income'; total: number }[];
+              outcome: { date: string; type: 'outcome'; total: number }[];
+            }
+          ) => {
+            result.push({
+              month: new Date(
+                `2025-${
+                  monthData.month < 10 ? '0' + monthData.month : monthData.month
+                }`
+              ).toLocaleString('id-ID', {
+                year: 'numeric',
+                month: 'long',
+              }),
+              income: monthData.income.reduce(
+                (sum, item) => sum + item.total,
+                0
+              ),
+              outcome: monthData.outcome.reduce(
+                (sum, item) => sum + item.total,
+                0
+              ),
+            });
+            return result;
+          },
+          []
+        );
+      })
       .catch((err) =>
         Swal.fire('Error', 'Gagal memuat data laporan.', 'error')
       );
