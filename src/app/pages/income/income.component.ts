@@ -22,11 +22,11 @@ interface IncomeItem {
   styleUrls: ['./income.component.css'],
 })
 export class IncomeComponent implements OnInit {
-  tableHeaders = ['Tanggal', 'Nama Item', 'Harga', 'Jumlah', 'Unit', 'Total'];
+  tableHeaders = ['Tanggal', 'Nama Item', 'Harga', 'Quantity', 'Satuan', 'Total'];
   tableData: IncomeItem[] = [];
 
   // URL is now hardcoded as requested
-  private backendUrl = 'https://ums-stion-be.vercel.app/api/income';
+  private backendUrl = 'http://localhost:3000/api/income';
 
   get totalIncome(): number {
     return this.tableData.reduce((sum, row) => sum + row.total, 0);
