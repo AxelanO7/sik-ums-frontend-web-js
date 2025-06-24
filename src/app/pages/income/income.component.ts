@@ -22,11 +22,18 @@ interface IncomeItem {
   styleUrls: ['./income.component.css'],
 })
 export class IncomeComponent implements OnInit {
-  tableHeaders = ['Tanggal', 'Nama Item', 'Harga', 'Quantity', 'Satuan', 'Total'];
+  tableHeaders = [
+    'Tanggal',
+    'Nama Item',
+    'Harga',
+    'Quantity',
+    'Satuan',
+    'Total',
+  ];
   tableData: IncomeItem[] = [];
 
   // URL is now hardcoded as requested
-  private backendUrl = 'https://ums-stion-be.vercel.app/api/income';
+  private backendUrl = 'http://localhost:3000/api/income';
 
   get totalIncome(): number {
     return this.tableData.reduce((sum, row) => sum + row.total, 0);
@@ -136,18 +143,19 @@ export class IncomeComponent implements OnInit {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        const data = result.value;
         const isEditing = !!item;
-
+        const data = result.value;
         const url = isEditing
           ? `${this.backendUrl}/${data.id}`
           : this.backendUrl;
         const method = isEditing ? 'PATCH' : 'POST';
+        const dataToSend = { ...data };
+        if (isEditing) delete dataToSend.id;
 
         fetch(url, {
           method: method,
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
+          body: JSON.stringify(dataToSend),
         })
           .then((res) => {
             if (!res.ok) throw new Error('Gagal menyimpan data!');
