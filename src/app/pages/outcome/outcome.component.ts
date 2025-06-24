@@ -22,14 +22,7 @@ interface OutcomeItem {
   styleUrls: ['./outcome.component.css'],
 })
 export class OutcomeComponent implements OnInit {
-  tableHeaders = [
-    'Tanggal',
-    'Nama Item',
-    'Harga',
-    'Quantity',
-    'Satuan',
-    'Total',
-  ];
+  tableHeaders = ['Tanggal', 'Nama Item', 'Harga', 'Qty', 'Satuan', 'Total'];
   tableData: OutcomeItem[] = [];
 
   // URL is now hardcoded as requested

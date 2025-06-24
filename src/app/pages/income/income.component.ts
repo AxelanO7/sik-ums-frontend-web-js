@@ -22,14 +22,7 @@ interface IncomeItem {
   styleUrls: ['./income.component.css'],
 })
 export class IncomeComponent implements OnInit {
-  tableHeaders = [
-    'Tanggal',
-    'Nama Item',
-    'Harga',
-    'Quantity',
-    'Satuan',
-    'Total',
-  ];
+  tableHeaders = ['Tanggal', 'Nama Item', 'Harga', 'Qty', 'Satuan', 'Total'];
   tableData: IncomeItem[] = [];
 
   // URL is now hardcoded as requested
