@@ -33,7 +33,7 @@ export class IncomeComponent implements OnInit {
   tableData: IncomeItem[] = [];
 
   // URL is now hardcoded as requested
-  private backendUrl = 'http://localhost:3000/api/income';
+  private backendUrl = 'https://ums-stion-be.vercel.app/api/income';
 
   get totalIncome(): number {
     return this.tableData.reduce((sum, row) => sum + row.total, 0);
