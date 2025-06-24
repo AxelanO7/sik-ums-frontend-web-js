@@ -32,7 +32,7 @@ export class ReportComponent implements OnInit {
 
   private fetchReport(): void {
     // URL is now hardcoded as requested
-    const backendUrl = 'http://localhost:3000/api';
+    const backendUrl = 'https://ums-stion-be.vercel.app/api';
     fetch(`${backendUrl}/report/by-year/2025`)
       .then((res) => res.json())
       .then((data) => {
