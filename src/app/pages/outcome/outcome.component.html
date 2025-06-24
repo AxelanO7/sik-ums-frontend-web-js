@@ -38,6 +38,7 @@
               {{ row.price | currency : "Rp " : "symbol" : "1.0-0" }}
             </td>
             <td class="px-6 py-4">{{ row.quantity | number }}</td>
+            <td class="px-6 py-4">{{ row.unit }}</td>
             <td class="px-6 py-4 font-bold">
               {{ row.total | currency : "Rp " : "symbol" : "1.0-0" }}
             </td>
@@ -59,7 +60,7 @@
         </tbody>
         <tfoot>
           <tr class="font-semibold text-gray-900 bg-gray-100">
-            <td colSpan="4" class="px-6 py-3 text-base text-right">TOTAL</td>
+            <td colSpan="5" class="px-6 py-3 text-base text-right">TOTAL</td>
             <td class="px-6 py-3 text-base">
               {{ totalOutcome | currency : "Rp " : "symbol" : "1.0-0" }}
             </td>
