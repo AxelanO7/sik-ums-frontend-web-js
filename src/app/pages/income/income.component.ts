@@ -10,6 +10,7 @@ interface IncomeItem {
   name: string;
   price: number;
   quantity: number;
+  unit: string;
   total: number;
 }
 
@@ -21,7 +22,7 @@ interface IncomeItem {
   styleUrls: ['./income.component.css'],
 })
 export class IncomeComponent implements OnInit {
-  tableHeaders = ['Tanggal', 'Nama Item', 'Harga', 'Jumlah', 'Total'];
+  tableHeaders = ['Tanggal', 'Nama Item', 'Harga', 'Jumlah', 'Unit', 'Total'];
   tableData: IncomeItem[] = [];
 
   // URL is now hardcoded as requested
@@ -59,9 +60,21 @@ export class IncomeComponent implements OnInit {
   }
 
   private showIncomeForm(item?: IncomeItem): void {
+    const units = ['pcs', 'kg', 'liter'];
+
     Swal.fire({
       title: item ? 'Edit Pemasukan' : 'Tambah Pemasukan Baru',
       html: `
+        <style>
+          .swal2-input {
+            width: 400px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+          }
+        </style>
         <input id="name" class="swal2-input" placeholder="Nama Item" value="${
           item?.name || ''
         }">
@@ -71,12 +84,24 @@ export class IncomeComponent implements OnInit {
         <input id="quantity" type="number" class="swal2-input" placeholder="Jumlah" value="${
           item?.quantity || ''
         }">
+        <select id="unit" class="swal2-input" placeholder="Satuan">
+          <option value="">-- Pilih Satuan --</option>
+          ${units
+            .map(
+              (unit) =>
+                `<option value="${unit}" ${
+                  item?.unit === unit ? 'selected' : ''
+                }>${unit}</option>`
+            )
+            .join('')}
+        </select>
         <input id="date" type="date" class="swal2-input" value="${
           item
             ? new Date(item.date).toISOString().split('T')[0]
             : new Date().toISOString().split('T')[0]
         }">
       `,
+      width: 500,
       focusConfirm: false,
       showCancelButton: true,
       confirmButtonText: 'Simpan',
@@ -90,10 +115,12 @@ export class IncomeComponent implements OnInit {
         const quantity = parseInt(
           (document.getElementById('quantity') as HTMLInputElement).value
         );
+        const unit = (document.getElementById('unit') as HTMLSelectElement)
+          .value;
         const date = (document.getElementById('date') as HTMLInputElement)
           .value;
 
-        if (!name || !price || !quantity || !date) {
+        if (!name || !price || !quantity || !unit || !date) {
           Swal.showValidationMessage('Mohon isi semua kolom');
           return false;
         }
@@ -102,6 +129,7 @@ export class IncomeComponent implements OnInit {
           name,
           price,
           quantity,
+          unit,
           date,
           total: price * quantity,
         };
