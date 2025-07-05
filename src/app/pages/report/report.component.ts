@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./report.component.css'],
 })
 export class ReportComponent implements OnInit {
+  loading = false; // Tambahkan state loading
   tableHeaders = ['Bulan', 'Pemasukan', 'Pengeluaran', 'Laba Rugi'];
   tableData: {
     month: string;
@@ -35,7 +36,7 @@ export class ReportComponent implements OnInit {
   }
 
   private fetchReport(): void {
-    // URL is now hardcoded as requested
+    this.loading = true; // Mulai loading
     const backendUrl = 'https://ums-stion-be.vercel.app/api';
     fetch(`${backendUrl}/report/by-year/2025`)
       .then((res) => res.json())
@@ -75,10 +76,12 @@ export class ReportComponent implements OnInit {
           },
           []
         );
+        this.loading = false; // Selesai loading
       })
-      .catch((err) =>
-        Swal.fire('Error', 'Gagal memuat data laporan.', 'error')
-      );
+      .catch((err) => {
+        this.loading = false; // Selesai loading (jika gagal)
+        Swal.fire('Error', 'Gagal memuat data laporan.', 'error');
+      });
   }
 
   printReport(): void {

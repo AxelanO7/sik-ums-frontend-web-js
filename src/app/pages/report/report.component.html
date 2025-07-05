@@ -7,24 +7,21 @@
       </button>
     </div>
 
-    <div class="overflow-x-auto bg-white rounded-lg shadow">
+    <div *ngIf="loading" class="text-center py-10">
+      <p class="text-lg text-gray-500">Memuat data laporan...</p>
+    </div>
+
+    <div *ngIf="!loading" class="overflow-x-auto bg-white rounded-lg shadow">
       <table class="w-full text-sm text-left text-gray-600">
         <thead class="text-xs text-gray-700 uppercase bg-gray-100">
           <tr>
-            <th
-              *ngFor="let header of tableHeaders"
-              scope="col"
-              class="px-6 py-3"
-            >
+            <th *ngFor="let header of tableHeaders" scope="col" class="px-6 py-3">
               {{ header }}
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr
-            *ngFor="let row of tableData"
-            class="bg-white border-b hover:bg-gray-50"
-          >
+          <tr *ngFor="let row of tableData" class="bg-white border-b hover:bg-gray-50">
             <td class="px-6 py-4 font-medium text-gray-900">{{ row.month }}</td>
             <td class="px-6 py-4 text-green-600 font-semibold">
               {{ row.income | currency : "Rp " : "symbol" : "1.0-0" }}
