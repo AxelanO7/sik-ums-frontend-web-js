@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./report.component.css'],
 })
 export class ReportComponent implements OnInit {
-  tableHeaders = ['Bulan', 'Pemasukan', 'Pengeluaran'];
+  tableHeaders = ['Bulan', 'Pemasukan', 'Pengeluaran', 'Laba Rugi'];
   tableData: {
     month: string;
     income: number;
@@ -24,6 +24,10 @@ export class ReportComponent implements OnInit {
 
   get totalPengeluaran(): number {
     return this.tableData.reduce((sum, row) => sum + row.outcome, 0);
+  }
+
+  get totalLabaRugi(): number {
+    return this.totalPemasukan - this.totalPengeluaran;
   }
 
   ngOnInit(): void {
@@ -75,5 +79,9 @@ export class ReportComponent implements OnInit {
       .catch((err) =>
         Swal.fire('Error', 'Gagal memuat data laporan.', 'error')
       );
+  }
+
+  printReport(): void {
+    window.print();
   }
 }
